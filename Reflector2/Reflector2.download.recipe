@@ -25,7 +25,7 @@
     <key>DOWNLOAD_URL</key>
     <string>http://www.airsquirrels.com/reflector/download/</string>
     <key>DOWNLOAD_REGEX</key>
-    <string>(?P&lt;url&gt;http://download.airsquirrels.com/Reflector2/Mac/Reflector-(?P&lt;version&gt;.+).dmg)</string>
+    <string>(?P&lt;download_path&gt;Reflector2\/Mac\/Reflector-(?P&lt;version&gt;.+)\.dmg)</string>
   </dict>
   <key>MinimumVersion</key>
   <string>0.5.0</string>
@@ -45,6 +45,11 @@
     <dict>
       <key>Processor</key>
       <string>URLDownloader</string>
+      <key>Arguments</key>
+      <dict>
+        <key>url</key>
+        <string>https://download.airsquirrels.com/%download_path%</string>
+      </dict>
     </dict>
     <dict>
       <key>Processor</key>
