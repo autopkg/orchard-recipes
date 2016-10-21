@@ -25,7 +25,7 @@
     <key>NAME</key>
     <string>Eyefi_Mobi_Desktop</string>
     <key>BASE_URL</key>
-    <string>http://download.eyefi.com</string>
+    <string>https://download.eyefi.com</string>
     <key>PKG_URL</key>
     <string>%BASE_URL%/mobi-osx/Eyefi%20Mobi.pkg</string>
     <key>USER_AGENT</key>
