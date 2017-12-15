@@ -23,7 +23,7 @@
                <key>url</key>
                <string><![CDATA[https://www.lwks.com/index.php?option=com_lwks&view=download&Itemid=206]]></string>
                <key>re_pattern</key>
-               <string><![CDATA[Lightworks for Mac OS X</h.*<strong>Latest release:</strong>.*<strong>(.*)</strong>.*<span>Release date:</span>]]></string>
+               <string><![CDATA[Lightworks for Mac OS X</h.*<strong>Latest release:</strong>.*?<strong>(.*?)</strong>]]></string>
                <key>result_output_var_name</key>
                <string>version</string>
                <key>re_flags</key>
