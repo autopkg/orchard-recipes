@@ -13,6 +13,7 @@ Authorises AFS via shelling out and using a kerberos keytab
 and performing aklog
 """
 
+from __future__ import absolute_import
 import os, subprocess
 from autopkglib import Processor, ProcessorError
 

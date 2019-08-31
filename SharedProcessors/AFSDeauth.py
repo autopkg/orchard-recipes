@@ -11,6 +11,7 @@
 De-authenticates AFS via unlog and kdestroy
 """
 
+from __future__ import absolute_import
 import subprocess
 from autopkglib import Processor, ProcessorError
 

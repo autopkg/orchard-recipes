@@ -23,6 +23,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+from __future__ import absolute_import
 import urllib2
 import json
 import re
@@ -87,7 +88,7 @@ class ErlangURLProvider(Processor):
         erlang_tabs = json.loads(response)[u'tabs']
 
         # Use OS X information from json
-        osx_tab = (tab for tab in erlang_tabs if tab[u'name'] == u'osx').next()
+        osx_tab = next((tab for tab in erlang_tabs if tab[u'name'] == u'osx'))
         # Select packages based on 'flavour'
         flavour_index = self.lookup_flavour(flavour)
         packages = osx_tab[u'flavours'][flavour_index][u'packages']

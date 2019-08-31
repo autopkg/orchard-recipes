@@ -13,6 +13,7 @@ list files in the specified path, performs regex and Version checking
 The highest version is returned as file
 """
 
+from __future__ import absolute_import
 import re, os
 from distutils.version import LooseVersion
 from autopkglib import Processor, ProcessorError
