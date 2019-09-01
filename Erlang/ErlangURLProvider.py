@@ -24,11 +24,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
 from __future__ import absolute_import
-import urllib2
 import json
 import re
 
 from autopkglib import Processor, ProcessorError
+
+try:
+    from urllib.parse import urlopen  # For Python 3
+except ImportError:
+    from urllib2 import urlopen  # For Python 2
 
 __all__ = [u'ErlangURLProvider']
 
@@ -83,7 +87,7 @@ class ErlangURLProvider(Processor):
         target_os = self.env.get('target_os', DEFAULT_TARGET)
         flavour = self.env.get('flavour', DEFAULT_FLAVOUR)
         get_version = self.env.get('version', DEFAULT_VERSION)
-        response = urllib2.urlopen(JSON_URL).read()
+        response = urlopen(JSON_URL).read()
         response = re.sub('\);', '', re.sub('^jsonCallback\(', '', response))
         erlang_tabs = json.loads(response)[u'tabs']
 
@@ -100,7 +104,7 @@ class ErlangURLProvider(Processor):
             idx=0
             # Select the latest *DMG* as this is what the of the recipe
             # rest expects (and there are .tgz links around)
-            # 
+            #
             while idx < len(filtered_packages):
                 url = DOWNLOAD_BASE_URL + filtered_packages[idx][u'path']
                 if re.match('.+\.dmg$', url):
@@ -113,7 +117,7 @@ class ErlangURLProvider(Processor):
             except StopIteration:
                 raise ProcessorError('Specified package version %s could not be found for specified OS version %s'
                                       % (get_version, target_os))
-        
+
         version = re.match(r'.+erlang_(.+)~osx.+', url).group(1)
 
         self.env['url'] = url
