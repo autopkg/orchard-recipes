@@ -58,7 +58,7 @@ class AFSAuth(Processor):
 
         try:
             subprocess.call(["kinit", "-t", keytabname, principal])
-        except Exception as kiniterror:
+        except BaseException as kiniterror:
             raise ProcessorError('Problem running kinit %s' % kiniterror)
 
         aklog = self.env['aklog_path']
@@ -68,7 +68,7 @@ class AFSAuth(Processor):
         self.output('Calling aklog %s ...' % aklog, verbose_level=5)
         try:
             subprocess.call([aklog])
-        except Exception as aklogerror:
+        except BaseException as aklogerror:
             raise ProcessorError('Problem running aklog %s' % aklogerror)
 
     def main(self):
