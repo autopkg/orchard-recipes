@@ -14,8 +14,11 @@ The highest version is returned as file
 """
 
 from __future__ import absolute_import
-import re, os
+
+import os
+import re
 from distutils.version import LooseVersion
+
 from autopkglib import Processor, ProcessorError
 
 __all__ = ["FSFileProvider"]
