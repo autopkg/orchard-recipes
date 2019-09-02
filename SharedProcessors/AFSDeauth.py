@@ -18,27 +18,27 @@ from autopkglib import Processor, ProcessorError
 __all__ = ["AFSDeauth"]
 
 class AFSDeauth(Processor):
-	
-	input_variables = {
-		'auth_method': {
-				 'description': 'keytab is the only option at the moment',
-				 'required': False,
-			       },
-	}
 
-	output_variables = {
+    input_variables = {
+        'auth_method': {
+                 'description': 'keytab is the only option at the moment',
+                 'required': False,
+                   },
+    }
+
+    output_variables = {
                        'test': {
-				 'description': 'used for testing',
-				 'required': False,
+                 'description': 'used for testing',
+                 'required': False,
                                },
         }
 
-	def killtoken(self):
-		subprocess.call(["unlog"], shell=True)
-		subprocess.call(["kdestroy"], shell=True)
-	
-	def main(self):
-		self.killtoken()
+    def killtoken(self):
+        subprocess.call(["unlog"], shell=True)
+        subprocess.call(["kdestroy"], shell=True)
+
+    def main(self):
+        self.killtoken()
 
 if __name__ == '__main__':
-	PROCESSOR = AFSDeauth()
+    PROCESSOR = AFSDeauth()

@@ -42,7 +42,7 @@ class FSFileProvider(Processor):
             'result_output_var_name': {
                 'description': 'desc',
                 },
-            }	
+            }
 
     def get_path_and_search(self, path, re_pattern):
         match_pattern = re.compile(re_pattern)
