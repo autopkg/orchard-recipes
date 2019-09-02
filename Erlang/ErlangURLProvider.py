@@ -89,7 +89,7 @@ class ErlangURLProvider(Processor):
         flavour = self.env.get('flavour', DEFAULT_FLAVOUR)
         get_version = self.env.get('version', DEFAULT_VERSION)
         response = urlopen(JSON_URL).read()
-        response = re.sub('\);', '', re.sub('^jsonCallback\(', '', response))
+        response = re.sub(r'\);', '', re.sub(r'^jsonCallback\(', '', response))
         erlang_tabs = json.loads(response)[u'tabs']
 
         # Use OS X information from json
@@ -108,7 +108,7 @@ class ErlangURLProvider(Processor):
             #
             while idx < len(filtered_packages):
                 url = DOWNLOAD_BASE_URL + filtered_packages[idx][u'path']
-                if re.match('.+\.dmg$', url):
+                if re.match(r'.+\.dmg$', url):
                     break
                 idx=idx+1
         else:
