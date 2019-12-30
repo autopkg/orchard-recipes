@@ -3,76 +3,40 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release version of Time Out</string>
+    <string>Downloads the current release version of Time Out (formerly known as Simon).</string>
     <key>Identifier</key>
     <string>uk.ac.ox.orchard.download.TimeOut</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
         <string>TimeOut</string>
-        <key>BASE_URL</key>
-        <string>http://www.dejal.com</string>
-        <key>HOMEPAGE_URL</key>
-        <string>%BASE_URL%/apps/</string>
-        <key>DOWNLOAD_URL</key>
-        <string>%BASE_URL%/download</string>
-	<key>USER_AGENT</key>
-	<string>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/601.4.4 (KHTML, like Gecko) Version/9.0.3 Safari/601.4.4</string>
     </dict>
     <key>MinimumVersion</key>
-    <string>0.4.0</string>
+    <string>1.0.0</string>
     <key>Process</key>
     <array>
         <dict>
             <key>Processor</key>
             <string>URLTextSearcher</string>
-            <key>Arguments</key> 
+            <key>Arguments</key>
             <dict>
-              <key>url</key>
-              <string>%HOMEPAGE_URL%</string>
-              <key>result_output_var_name</key>
-              <string>DOWNLOADPAGE_URL</string>
-              <key>re_pattern</key>
-              <string>.*href=&quot;\/(download\/\?prod=timeout.*)&quot; title.*</string>
-	      <key>request_headers</key>
-	      <dict>
-	      	<key>user-agent</key>
-		<string>%USER_AGENT%</string>
-	      </dict>
-            </dict>
-        </dict>
-        <dict>
-            <key>Processor</key>
-            <string>URLTextSearcher</string>
-            <key>Arguments</key> 
-            <dict>
-              <key>url</key>
-              <string>%BASE_URL%/%DOWNLOADPAGE_URL%</string>
-              <key>result_output_var_name</key>
-              <string>FILENAME</string>
-              <key>re_pattern</key>
-              <string>http-equiv=&quot;refresh&quot;.*url=(.*zip)&quot;</string>
-	      <key>request_headers</key>
-	      <dict>
-	      	<key>user-agent</key>
-		<string>%USER_AGENT%</string>
-	      </dict>
+                <key>re_pattern</key>
+                <string>&lt;span class="version"&gt;version ([\d\.]+)&lt;/span&gt;</string>
+                <key>result_output_var_name</key>
+                <string>version</string>
+                <key>url</key>
+                <string>http://www.dejal.com/apps/</string>
             </dict>
         </dict>
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
-            <key>Arguments</key> 
+            <key>Arguments</key>
             <dict>
                 <key>filename</key>
-                <string>%NAME%.zip</string>
-		<key>request_headers</key>
-		<dict>
-		  <key>user-agent</key>
-		  <string>%USER_AGENT%</string>
-		</dict>
+                <string>%NAME%-%version%.zip</string>
                 <key>url</key>
-                <string>%DOWNLOAD_URL%/%FILENAME%</string>
+                <string>http://www.dejal.com/download/?prod=timeout&amp;vers=%version%&amp;rel=gen&amp;lang=en&amp;op=get&amp;ref=apps</string>
             </dict>
         </dict>
         <dict>
@@ -87,9 +51,31 @@
                 <key>archive_path</key>
                 <string>%pathname%</string>
                 <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%</string>
+                <string>%RECIPE_CACHE_DIR%/%NAME%/Applications</string>
                 <key>purge_destination</key>
                 <true/>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>CodeSignatureVerifier</string>
+            <key>Arguments</key>
+            <dict>
+                <key>input_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%/Applications/Time Out.app</string>
+                <key>requirement</key>
+                <string>anchor apple generic and identifier "com.dejal.timeout" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "6Z7QW53WB6")</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>Versioner</string>
+            <key>Arguments</key>
+            <dict>
+                <key>input_plist_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%/Applications/Time Out.app/Contents/Info.plist</string>
+                <key>plist_version_key</key>
+                <string>CFBundleShortVersionString</string>
             </dict>
         </dict>
     </array>

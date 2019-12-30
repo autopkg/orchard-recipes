@@ -3,25 +3,29 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release version of Time Out and imports into Munki.</string>
+    <string>Downloads the current release version of Time Out (formerly known as Simon) and imports into Munki.</string>
     <key>Identifier</key>
     <string>uk.ac.ox.orchard.munki.TimeOut</string>
     <key>Input</key>
     <dict>
-        <key>NAME</key>
-        <string>Time_Out</string>
         <key>MUNKI_REPO_SUBDIR</key>
         <string>%NAME%</string>
+        <key>NAME</key>
+        <string>TimeOut</string>
         <key>pkginfo</key>
         <dict>
+            <key>blocking_applications</key>
+            <array>
+                <string>Time Out.app</string>
+            </array>
             <key>catalogs</key>
             <array>
                 <string>testing</string>
             </array>
-            <key>category</key>
-            <string>Office and Productivity</string>
             <key>description</key>
-            <string>Time Out is a break reminder tool with micro-breaks</string>
+            <string>Monitor changes and crashes with Web sites and servers.</string>
+            <key>developer</key>
+            <string>Dejal Systems</string>
             <key>display_name</key>
             <string>Time Out</string>
             <key>name</key>
@@ -31,21 +35,34 @@
         </dict>
     </dict>
     <key>MinimumVersion</key>
-    <string>0.3.0</string>
+    <string>1.0.0</string>
     <key>ParentRecipe</key>
     <string>uk.ac.ox.orchard.pkg.TimeOut</string>
     <key>Process</key>
     <array>
         <dict>
+            <key>Processor</key>
+            <string>DmgCreator</string>
+            <key>Arguments</key>
+            <dict>
+                <key>dmg_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+                <key>dmg_root</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%/Applications</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
             <key>Arguments</key>
             <dict>
                 <key>pkg_path</key>
-                <string>%pkg_path%</string>
+                <string>%dmg_path%</string>
                 <key>repo_subdirectory</key>
                 <string>%MUNKI_REPO_SUBDIR%</string>
+                <key>version_comparison_key</key>
+                <string>CFBundleShortVersionString</string>
             </dict>
-            <key>Processor</key>
-            <string>MunkiImporter</string>
         </dict>
     </array>
 </dict>
