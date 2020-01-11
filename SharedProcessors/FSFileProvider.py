@@ -23,36 +23,33 @@ from autopkglib import Processor, ProcessorError
 
 __all__ = ["FSFileProvider"]
 
+
 class FSFileProvider(Processor):
     input_variables = {
-            're_pattern': {
-                'description': 'Regular expression (Python) to match against.',
-                'required': True,
-
-                },
-            'path': {
-                'description': 'provide the afs path',
-                'required': True,
-                },
-            'result_output_var_name': {
-                'description': 'desc',
-                'required': False,
-                'default': 'match',
-                },
-            }
+        "re_pattern": {
+            "description": "Regular expression (Python) to match against.",
+            "required": True,
+        },
+        "path": {"description": "provide the afs path", "required": True,},
+        "result_output_var_name": {
+            "description": "desc",
+            "required": False,
+            "default": "match",
+        },
+    }
 
     output_variables = {
-            'result_output_var_name': {
-                'description': 'desc',
-                },
-            }
+        "result_output_var_name": {"description": "desc",},
+    }
 
     def get_path_and_search(self, path, re_pattern):
         match_pattern = re.compile(re_pattern)
         try:
             software = os.listdir(path)
         except OSError:
-            raise ProcessorError('Error Messages will get better with time'(path, re_pattern))
+            raise ProcessorError(
+                "Error Messages will get better with time"(path, re_pattern)
+            )
         highestver = ""
         finalmatch = None
         for x in software:
@@ -64,17 +61,20 @@ class FSFileProvider(Processor):
         if finalmatch:
             return (finalmatch.group(finalmatch.lastindex or 0), finalmatch.groupdict())
         else:
-            raise ProcessorError('The regular expression \'%s\' does not match any file in path \'%s\'' % (re_pattern, path))
+            raise ProcessorError(
+                "The regular expression '%s' does not match any file in path '%s'"
+                % (re_pattern, path)
+            )
 
     def main(self):
-        output_var_name = self.env['result_output_var_name']
+        output_var_name = self.env["result_output_var_name"]
 
-        if 'path' in self.env:
-            path = self.env['path']
-        if 're_pattern' in self.env:
-            re_pattern = self.env['re_pattern']
+        if "path" in self.env:
+            path = self.env["path"]
+        if "re_pattern" in self.env:
+            re_pattern = self.env["re_pattern"]
 
-        groupmatch, groupdict = self.get_path_and_search(path,re_pattern)
+        groupmatch, groupdict = self.get_path_and_search(path, re_pattern)
 
         if output_var_name not in groupdict.keys():
             groupdict[output_var_name] = groupmatch
@@ -82,9 +82,11 @@ class FSFileProvider(Processor):
         self.output_variables = {}
         for key in groupdict.keys():
             self.env[key] = groupdict[key]
-            self.output('Found matching text (%s): %s' % (key, self.env[key], ))
+            self.output("Found matching text (%s): %s" % (key, self.env[key],))
             self.output_variables[key] = {
-                    'description': 'Matched regular expression group'}
+                "description": "Matched regular expression group"
+            }
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     PROCESSOR = FSFileProvider()

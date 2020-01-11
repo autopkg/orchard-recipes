@@ -19,21 +19,19 @@ from autopkglib import Processor, ProcessorError
 
 __all__ = ["AFSDeauth"]
 
+
 class AFSDeauth(Processor):
 
     input_variables = {
-        'auth_method': {
-                 'description': 'keytab is the only option at the moment',
-                 'required': False,
-                   },
+        "auth_method": {
+            "description": "keytab is the only option at the moment",
+            "required": False,
+        },
     }
 
     output_variables = {
-                       'test': {
-                 'description': 'used for testing',
-                 'required': False,
-                               },
-        }
+        "test": {"description": "used for testing", "required": False,},
+    }
 
     def killtoken(self):
         subprocess.call(["unlog"], shell=True)
@@ -42,5 +40,6 @@ class AFSDeauth(Processor):
     def main(self):
         self.killtoken()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     PROCESSOR = AFSDeauth()
