@@ -34,8 +34,8 @@ class AFSDeauth(Processor):
     }
 
     def killtoken(self):
-        subprocess.call(["unlog"], shell=True)
-        subprocess.call(["kdestroy"], shell=True)
+        subprocess.call(["unlog"])
+        subprocess.call(["/usr/bin/kdestroy"])
 
     def main(self):
         self.killtoken()
