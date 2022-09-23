@@ -19,7 +19,7 @@
 	<key>Description</key>
 	<string>Downloads the current release version of Protégé</string>
 	<key>Identifier</key>
-	<string>uk.ac.ox.orchard.download.Protege-eshirk</string>
+	<string>uk.ac.ox.orchard.download.Protege</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
