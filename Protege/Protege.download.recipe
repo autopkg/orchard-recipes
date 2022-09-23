@@ -7,30 +7,30 @@
 		<key>Copyright</key>
 		<string>University of Oxford 2016</string>
 		<key>Author</key>
-			<dict>
-				<key>Name</key>
-				<string>Ian Collier</string>
-				<key>Email</key>
-				<string>ian.collier at cs.ox.ac.uk</string>
-				<key>Github</key>
-				<string>imc0</string>
-			</dict>
+		<dict>
+			<key>Name</key>
+			<string>Ian Collier</string>
+			<key>Email</key>
+			<string>ian.collier at cs.ox.ac.uk</string>
+			<key>Github</key>
+			<string>imc0</string>
+		</dict>
 	</dict>
 	<key>Description</key>
 	<string>Downloads the current release version of Protégé</string>
 	<key>Identifier</key>
 	<string>uk.ac.ox.orchard.download.Protege-eshirk</string>
 	<key>Input</key>
-		<dict>
-			<key>NAME</key>
-			<string>MunkiAdmin</string>
-			<key>GITHUB_REPO</key>
-			<string>protegeproject/protege-distribution</string>
-			<key>ASSET_REGEX</key>
-			<string>Protege-.*-os-x.zip</string>
-			<key>INCLUDE_PRERELEASES</key>
-			<string></string>
-		</dict>
+	<dict>
+		<key>NAME</key>
+		<string>MunkiAdmin</string>
+		<key>GITHUB_REPO</key>
+		<string>protegeproject/protege-distribution</string>
+		<key>ASSET_REGEX</key>
+		<string>Protege-.*-os-x.zip</string>
+		<key>INCLUDE_PRERELEASES</key>
+		<string></string>
+	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.9</string>
 	<key>Process</key>
@@ -39,14 +39,14 @@
 			<key>Processor</key>
 			<string>GitHubReleasesInfoProvider</string>
 			<key>Arguments</key>
-				<dict>
-					<key>asset_regex</key>
-					<string>%ASSET_REGEX%</string>
-					<key>github_repo</key>
-					<string>%GITHUB_REPO%</string>
-					<key>include_prereleases</key>
-					<string>%INCLUDE_PRERELEASES%</string>
-				</dict>
+			<dict>
+				<key>asset_regex</key>
+				<string>%ASSET_REGEX%</string>
+				<key>github_repo</key>
+				<string>%GITHUB_REPO%</string>
+				<key>include_prereleases</key>
+				<string>%INCLUDE_PRERELEASES%</string>
+			</dict>
 			</dict>
 		<dict>
 			<key>Processor</key>
