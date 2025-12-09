@@ -22,12 +22,14 @@
   <string>uk.ac.ox.orchard.download.Google_Cloud_SDK</string>
   <key>Input</key>
   <dict>
+    <key>ARCH</key>
+    <string>x86_64</string>
     <key>NAME</key>
     <string>Google_Cloud_SDK</string>
     <key>BASE_URL</key>
     <string>https://cloud.google.com/sdk/docs/quickstart-macos</string>
     <key>PKG_SEARCH_PATTERN</key>
-    <string>href="(?P&lt;pkgurl&gt;http[^"]+-darwin-x86_64.tar.gz)"</string>
+    <string>href="(?P&lt;pkgurl&gt;http[^"]+-darwin-%ARCH%.tar.gz)"</string>
     <key>VERSION_SEARCH_PATTERN</key>
     <string>&lt;h2[^\&gt;]+version\s(?P&lt;version&gt;[0-9\.]{2,})</string>
   </dict>
