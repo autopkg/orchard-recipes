@@ -29,7 +29,7 @@
     <key>PKG_SEARCH_PATTERN</key>
     <string>href="(?P&lt;pkgurl&gt;http[^"]+-darwin-x86_64.tar.gz)"</string>
     <key>VERSION_SEARCH_PATTERN</key>
-    <string>&lt;h2[^\&gt;]+version\s\((?P&lt;version&gt;[0-9\.]{2,})\)</string>
+    <string>&lt;h2[^\&gt;]+version\s(?P&lt;version&gt;[0-9\.]{2,})</string>
   </dict>
   <key>Process</key>
   <array>
