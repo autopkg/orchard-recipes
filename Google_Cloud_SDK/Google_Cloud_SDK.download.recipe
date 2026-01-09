@@ -22,14 +22,15 @@
   <string>uk.ac.ox.orchard.download.Google_Cloud_SDK</string>
   <key>Input</key>
   <dict>
+    <!-- ARCH should be either arm or x86_64 -->
+    <key>ARCH</key>
+    <string>arm</string>
     <key>NAME</key>
     <string>Google_Cloud_SDK</string>
     <key>BASE_URL</key>
     <string>https://cloud.google.com/sdk/docs/quickstart-macos</string>
-    <key>PKG_SEARCH_PATTERN</key>
-    <string>href="(?P&lt;pkgurl&gt;http[^"]+-darwin-x86_64.tar.gz)"</string>
     <key>VERSION_SEARCH_PATTERN</key>
-    <string>&lt;h2[^\&gt;]+version\s\((?P&lt;version&gt;[0-9\.]{2,})\)</string>
+    <string>Install gcloud CLI version (?P&lt;version&gt;[0-9\.]{2,})</string>
   </dict>
   <key>Process</key>
   <array>
@@ -46,24 +47,13 @@
     </dict>
     <dict>
       <key>Processor</key>
-      <string>URLTextSearcher</string>
-      <key>Arguments</key>
-      <dict>
-        <key>url</key>
-        <string>%BASE_URL%</string>
-        <key>re_pattern</key>
-        <string>%PKG_SEARCH_PATTERN%</string>
-      </dict>
-    </dict>
-    <dict>
-      <key>Processor</key>
       <string>URLDownloader</string>
       <key>Arguments</key>
       <dict>
         <key>url</key>
-        <string>%pkgurl%</string>
+<string>https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-darwin-%ARCH%.tar.gz</string>
       </dict>
-    </dict>
+    </dict> 
     <dict>
       <key>Processor</key>
       <string>EndOfCheckPhase</string>
