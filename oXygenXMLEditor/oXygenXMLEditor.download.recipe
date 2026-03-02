@@ -19,7 +19,7 @@
   <key>Description</key>
   <string>Downloads the latest version of oXygen XML Editor</string>
   <key>Identifier</key>
-  <string>uk.ac.ox.orchard.download.oXygenXMLEditor</string>
+  <string>local.download.oXygenXMLEditor</string>
   <key>Input</key>
   <dict>
     <key>SITE</key>
@@ -41,7 +41,7 @@
         <key>url</key>
         <string>%DOWNLOAD_PAGE%</string>
         <key>re_pattern</key>
-        <string><![CDATA[macOS.+?Version: (?P<version>[\d\.]+).+href='/download_thanks.html\?url=.*(?P<urlpath>/InstData.+oxygen-openjdk.dmg)]]></string>
+        <string><![CDATA[macOS.+?Version: (?P<version>[\d\.]+).+href="/download_thanks.html\?url=.*(?P<urlpath>/InstData.+oxygen-openjdk.dmg)]]></string>
             <key>re_flags</key>
             <array>
               <string>MULTILINE</string>
