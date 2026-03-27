@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/autopkg/python
 # encoding: utf-8
 '''
 ErlangURLProvider.py
