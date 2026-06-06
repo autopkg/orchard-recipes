@@ -14,7 +14,8 @@ The highest version is returned as file
 """
 
 import re, os
-from distutils.version import LooseVersion
+
+from autopkglib import APLooseVersion as LooseVersion
 from autopkglib import Processor, ProcessorError
 
 __all__ = ["FSFileProvider"]
